@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# 提取工作目录
+book_mentor_work-*/
+
+# 测试产物
+test_out/
+
+# 系统文件
+.DS_Store
+Thumbs.db
