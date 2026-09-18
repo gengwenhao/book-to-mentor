@@ -1,0 +1,15 @@
+{
+  "timestamp": "2026-09-18T17:59:07.677447+08:00",
+  "python": "3.13.4",
+  "base_commit": "1717e91e93c31df9a7c8bb2bcfce764696dfb08d",
+  "tests_run": 65,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "success": true,
+  "optional_dependencies": {
+    "pypdf": "6.10.0",
+    "striprtf": "0.0.29"
+  },
+  "scope": "deterministic extraction, state, structural validation; not human learning outcomes"
+}
