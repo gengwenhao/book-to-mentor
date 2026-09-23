@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="420" viewBox="0 0 1280 420" role="img" aria-labelledby="title desc">
+  <title id="title">Book to Mentor — Read. Reason. Retain.</title>
+  <desc id="desc">A technical diagram connects source documents, a mentor engine, and learning evidence.</desc>
+  <defs>
+    <linearGradient id="bg" x2="1" y2="1"><stop stop-color="#07101e"/><stop offset="1" stop-color="#102736"/></linearGradient>
+    <linearGradient id="accent" gradientUnits="userSpaceOnUse" x1="345" y1="317" x2="935" y2="317"><stop stop-color="#00e0bf"/><stop offset="1" stop-color="#62a8ff"/></linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 H 0 V 40" fill="none" stroke="#295065" stroke-opacity=".28"/></pattern>
+  </defs>
+  <rect width="1280" height="420" rx="20" fill="url(#bg)"/>
+  <rect width="1280" height="420" rx="20" fill="url(#grid)"/>
+  <rect x="56" y="52" width="8" height="18" rx="2" fill="#00e0bf"/>
+  <g font-family="ui-monospace, SFMono-Regular, Consolas, monospace">
+    <text x="78" y="67" fill="#83a7bc" font-size="15" letter-spacing="2">OPEN AGENT SKILL / SOURCE-GROUNDED LEARNING</text>
+    <text x="56" y="143" fill="#f0f7ff" font-family="Inter, Arial, sans-serif" font-size="64" font-weight="700" letter-spacing="-2">BOOK TO MENTOR</text>
+    <text x="60" y="190" fill="#00e0bf" font-size="24">Read. Reason. Retain.</text>
+    <text x="60" y="225" fill="#abc1d1" font-family="Arial, sans-serif" font-size="19">Turn your documents into a mentor you can keep learning with.</text>
+    <path d="M 345 317 H 470 M 810 317 H 935" stroke="url(#accent)" stroke-width="2"/>
+    <path d="m460 311 10 6-10 6m465-12 10 6-10 6" stroke="#62a8ff" fill="none" stroke-width="2"/>
+    <g fill="#0a1a29" stroke="#33566d">
+      <rect x="60" y="277" width="285" height="80" rx="10"/>
+      <rect x="470" y="277" width="340" height="80" rx="10" stroke="#00bda5"/>
+      <rect x="935" y="277" width="285" height="80" rx="10"/>
+    </g>
+    <g font-size="13" fill="#6b97ad"><text x="80" y="303">01 / SOURCE</text><text x="490" y="303">02 / MENTOR</text><text x="955" y="303">03 / EVIDENCE</text></g>
+    <g font-size="17" fill="#e2edf6"><text x="80" y="334">Books + documents</text><text x="490" y="334">Explain · Practice · Recall</text><text x="955" y="334">Learning observations</text></g>
+    <text x="60" y="394" fill="#6b97ad" font-size="12" letter-spacing="1">TRACEABLE SOURCES   /   PORTABLE FILES   /   EN + 中文</text>
+    <text x="1220" y="394" fill="#6b97ad" text-anchor="end" font-size="12">BY GENG WENHAO</text>
+  </g>
+</svg>

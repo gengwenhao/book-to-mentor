@@ -16,9 +16,13 @@ Use the issue form that best matches your report: Bug report, Compatibility repo
 Keep changes focused and add or update tests when behavior changes.
 
 ```bash
+python scripts/release.py sync
+python scripts/release.py check
 python -S -m unittest discover -s tests -v
 python scripts/validate_mentor.py /path/to/generated-mentor
 ```
+
+Edit runtime scripts/templates/docs at the repository root, then synchronize their generated copies into `skills/book-to-mentor/`. The nested `SKILL.md` itself is canonical. Keep English and Chinese documentation aligned; preserve source locators, state keys, and existing learner history when adding languages. See the [release guide](docs/releasing.md) for the source layout, versioning, and distribution boundaries.
 
 Generated mentors and learner state are not test fixtures by default. Use synthetic or properly licensed samples and clearly mark simulated learning evidence.
 

@@ -1,6 +1,6 @@
 {
   "name": "book-to-mentor",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Turn books and documents into source-grounded AI mentor skills with guided practice and learning records.",
   "author": { "name": "Geng Wenhao", "url": "https://github.com/gengwenhao" },
   "homepage": "https://github.com/gengwenhao/book-to-mentor",
@@ -23,6 +23,6 @@
       "Turn this document into a source-grounded mentor skill.",
       "先把这本书的第一章做成导师并带我试学。"
     ],
-    "brandColor": "#7C4D32"
+    "brandColor": "#00CDB5"
   }
 }

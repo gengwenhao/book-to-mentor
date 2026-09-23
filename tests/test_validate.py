@@ -69,6 +69,30 @@ class ValidatorTests(unittest.TestCase):
         (self.root / 'sources.md').unlink()
         self.assert_rejected('sources.md')
 
+    def test_english_chapter_headings_pass(self):
+        self.write('chapters/ch01-evidence.md', '# Evidence\n\n## Sources\nFixture chapter 1.\n\n'
+                   '## Key questions\n1. What supports the claim?\n')
+        self.assertTrue(validator.validate(self.root)['passed'])
+
+    def test_other_languages_use_stable_markers(self):
+        self.write('chapters/ch01-evidence.md', '# Evidencia\n\n## Fuentes\n<!-- mentor:source -->\n'
+                   'Capítulo 1.\n\n## Preguntas\n<!-- mentor:questions -->\n1. ¿Qué evidencia?\n')
+        self.assertTrue(validator.validate(self.root)['passed'])
+
+    def test_empty_marker_is_not_source_evidence(self):
+        self.write('chapters/ch01-evidence.md', '# Evidence\n\n## Fuentes\n<!-- mentor:source -->\n\n'
+                   '## Preguntas\n<!-- mentor:questions -->\n1. What evidence?\n')
+        self.assert_rejected('missing source locator')
+
+    def test_empty_english_source_section_cannot_borrow_practice_content(self):
+        self.write('chapters/ch01-evidence.md', '# Evidence\n\n## Sources\n\n'
+                   '## Practice\n1. What evidence?\n')
+        self.assert_rejected('missing source locator')
+
+    def test_english_template_placeholder_is_rejected(self):
+        self.write('patterns.md', '# Patterns\n\n[TODO: source-supported patterns]\n')
+        self.assert_rejected('unfilled scaffold')
+
     def test_missing_chapter_source_locator_is_rejected(self):
         self.write('chapters/ch01-evidence.md', '# Evidence\n\n## 关键问题\n1. What supports the claim?\n')
         self.assert_rejected('missing source locator')

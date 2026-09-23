@@ -1,0 +1,106 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+  # Manual runs validate/build only. Publishing requires an explicit version tag.
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Validate source and release version
+        env:
+          REF_TYPE: ${{ github.ref_type }}
+          REF_NAME: ${{ github.ref_name }}
+        run: |
+          if [ "$REF_TYPE" = tag ]; then
+            git merge-base --is-ancestor HEAD origin/master
+            python scripts/release.py check --tag "$REF_NAME"
+          else
+            python scripts/release.py check
+          fi
+      - name: Install format parsers
+        run: python -m pip install -r requirements-test.txt
+      - name: Run regression, language, and packaging tests
+        run: python -m unittest discover -s tests -v
+      - name: Build release archives
+        id: version
+        run: |
+          python scripts/release.py build
+          python -c 'import json, os; v=json.load(open("release.json"))["version"]; print("version="+v, file=open(os.environ["GITHUB_OUTPUT"], "a"))'
+          cat dist/v*/distribution-checklist.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: release-payload
+          path: dist/
+          if-no-files-found: error
+
+  github:
+    if: github.event_name == 'push' && github.ref_type == 'tag'
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - uses: actions/download-artifact@v4
+        with:
+          name: release-payload
+          path: dist/
+      - name: Publish GitHub Release (safe to rerun)
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_VERSION: ${{ needs.build.outputs.version }}
+        run: python scripts/publish_github.py --directory "dist/v$RELEASE_VERSION"
+
+  clawhub:
+    if: github.event_name == 'push' && github.ref_type == 'tag'
+    needs: [build, github]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/download-artifact@v4
+        with:
+          name: release-payload
+          path: dist/
+      - name: Submit exact version to ClawHub
+        env:
+          CLAWHUB_TOKEN: ${{ secrets.CLAWHUB_TOKEN }}
+          RELEASE_VERSION: ${{ needs.build.outputs.version }}
+        run: python scripts/publish_clawhub.py --directory "dist/v$RELEASE_VERSION"
+      - name: Save ClawHub receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: clawhub-receipt
+          path: dist/**/clawhub-result.json
+          if-no-files-found: ignore

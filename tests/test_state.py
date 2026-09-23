@@ -34,6 +34,38 @@ class StateTests(unittest.TestCase):
         self.assertEqual(state.initialize(self.root)['status'], 'existing')
         self.assertEqual(before, [p.read_bytes() for p in files])
 
+    def test_english_initialization_and_record_keep_english_labels(self):
+        root = self.root / 'english'
+        state.initialize(root, 'en')
+        state.record(root, self.event(note='A bilingual note: 反例'))
+        self.assertEqual(state.load_state(root)['language'], 'en')
+        rendered = (root / 'learnings.md').read_text()
+        self.assertIn('# Learning record', rendered)
+        self.assertIn('Simulated observations', rendered)
+        self.assertIn('A bilingual note: 反例', rendered)
+
+    def test_reinitialization_does_not_translate_or_reset_existing_records(self):
+        state.record(self.root, self.event())
+        before = [(self.root / p).read_bytes() for p in ('state/state.json', 'learnings.md')]
+        state.initialize(self.root, 'en')
+        self.assertEqual(before, [(self.root / p).read_bytes() for p in ('state/state.json', 'learnings.md')])
+
+    def test_supported_chinese_and_legacy_labels_match(self):
+        root = self.root / 'chinese'
+        state.initialize(root, 'zh-CN')
+        self.assertEqual((root / 'learnings.md').read_text(), (self.root / 'learnings.md').read_text())
+
+    def test_invalid_language_has_a_validation_error_not_a_type_error(self):
+        for language in ('fr', [], {}, None):
+            with self.subTest(language=language), self.assertRaises(ValueError):
+                state.validate_state({'schema_version': 1, 'observations': [], 'language': language})
+
+    def test_language_cli_option_is_only_for_initialization(self):
+        result = subprocess.run([sys.executable, str(SCRIPT), 'show', str(self.root), '--language', 'en'],
+                                capture_output=True, text=True)
+        self.assertEqual(result.returncode, 2)
+        self.assertIn('only supported by init', result.stderr)
+
     def test_idempotent_retry_and_conflicting_id(self):
         event = self.event()
         state.record(self.root, event)

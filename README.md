@@ -1,149 +1,166 @@
-# 📚 Book-to-Mentor — 把书籍变成可追溯的 AI 导师
+<p align="center"><img src="assets/banner.svg" alt="Book to Mentor — Read. Reason. Retain." width="100%"></p>
 
-输入书籍或文档，生成一个可继续使用的导师 Skill：按章查内容、讲解或练习、记录学习证据，再据反馈调整教学方式。
+<p align="center">
+  <a href="README.md">English</a> · <a href="README.zh-CN.md">简体中文</a><br>
+  <a href="https://github.com/gengwenhao/book-to-mentor/actions/workflows/tests.yml"><img src="https://github.com/gengwenhao/book-to-mentor/actions/workflows/tests.yml/badge.svg" alt="Tests"></a>
+  <a href="https://github.com/gengwenhao/book-to-mentor/releases"><img src="https://img.shields.io/github/v/release/gengwenhao/book-to-mentor?color=00bda5" alt="Latest release"></a>
+  <a href="https://skills.sh/gengwenhao/book-to-mentor"><img src="https://skills.sh/b/gengwenhao/book-to-mentor" alt="skills.sh"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-62a8ff" alt="MIT license"></a>
+</p>
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![skills.sh](https://skills.sh/b/gengwenhao/book-to-mentor)](https://skills.sh/gengwenhao/book-to-mentor)
+# Your next book can become your next mentor.
 
-## 能做什么
+Book-to-Mentor turns a book or document into a reusable AI mentor skill: explanations you can trace to the source, practice that adapts to your intent, and a learning record that survives the next conversation.
 
-- **Distill 蒸馏**：提炼材料中的概念、框架与使用条件，附来源定位；按需加载章节。
-- **Mentor 教学**：引导、讲解、速查三种方式随用户意图切换。每轮少量问题，卡住或疲惫时转为讲解。
-- **Evolve 改进**：记录提示后答对、独立迁移、延迟回忆等不同证据，提出可检验的教学改进。没有真人基线时不声称改进有效。
+**Not just a summary. A place to keep learning.**
 
-这是供 agent 执行的生成流程，提取脚本不会自行生成导师。项目没有经过真人长期学习效果验证，也不承诺固定节省比例或学习成绩提升。当前实现与设计边界见 [docs/blueprint.md](docs/blueprint.md)。
+| Distill | Mentor | Remember |
+| --- | --- | --- |
+| Map concepts and frameworks to source locations. Load chapters on demand. | Switch between guided practice, direct explanation, and quick lookup. | Separate hinted answers, independent application, and delayed recall. |
 
-## 安装与使用
+This is an **agent-executed workflow**, not a standalone book reader. Scripts extract and validate; your agent builds and teaches the mentor. Long-term learning outcomes have not been validated in a human study.
 
-### Agent Skills 通用安装
+## Start in one command
 
 ```bash
-npx skills add gengwenhao/book-to-mentor
+npx skills add gengwenhao/book-to-mentor --skill book-to-mentor
 ```
 
-也可以直接克隆仓库，将整个目录放入宿主实际配置的技能目录：
+Then give your agent a local book or document:
 
-```bash
-git clone https://github.com/gengwenhao/book-to-mentor.git
+```text
+Use book-to-mentor to turn /path/to/book.pdf into a mentor skill.
+Start with chapter 1, teach in English, and save it in this workspace.
 ```
 
-也可以让 agent 直接读取本仓库的 `SKILL.md`。不同宿主的发现方式与安装路径需要按其配置确认；复制目录本身不证明安装成功。
+Try: “Explain this directly”, “Give me one application question”, or “Resume where we stopped.” Output defaults to `mentors/<slug>-mentor/`. When adding material later, the workflow preserves existing teaching rules and learning history.
 
-### Codex / ChatGPT 插件市场
+Requires an agent that can read/write local files and run Python 3.10+. Text, Markdown, HTML, EPUB, and DOCX use the standard library. PDF needs `pypdf` or `pdfminer.six`; RTF needs `striprtf`. Technical PDFs can optionally use `docling`. [Formats, setup, and limitations →](docs/formats.md)
+
+## Choose your home
+
+| Channel | What you can use | Update behavior |
+| --- | --- | --- |
+| [Agent Skills / skills.sh](https://skills.sh/gengwenhao/book-to-mentor) | Self-contained skill from this repository | Reinstall/update through the skills CLI; no silent update of installed copies |
+| Codex / ChatGPT plugin host | This repository's custom marketplace | Refresh marketplace and update/reinstall the plugin |
+| Claude Code | This repository's plugin marketplace | Marketplace refresh + plugin update; optional host auto-update setting |
+| [GitHub Releases](https://github.com/gengwenhao/book-to-mentor/releases) | Versioned skill and plugin ZIPs, checksums | Automatically produced by a release tag |
+| [ClawHub / OpenClaw](https://clawhub.ai/gengwenhao/book-to-mentor) | Publication submitted; public availability subject to moderation | Workflow submits each tagged version; installed copies still need updating |
+| Third-party directories | Codex community marketplace + two community PRs submitted | Review/PR workflow, **not** automatic synchronization |
+
+Custom marketplace support is not an official OpenAI/Anthropic directory listing. Other Agent Skills hosts may work; their end-to-end compatibility is not certified. [Exact channel status and tracking links →](docs/platforms.md)
+
+<details>
+<summary>Codex / ChatGPT custom marketplace</summary>
 
 ```bash
 codex plugin marketplace add gengwenhao/book-to-mentor
+```
+
+Select `Geng Wenhao Skills` in your host's plugin directory and install **Book to Mentor**. Where the CLI supports plugin installation:
+
+```bash
 codex plugin add book-to-mentor@gengwenhao-skills
 ```
 
-安装或更新后请在新任务中测试，以确保宿主重新加载 skill。仓库内的 `.codex-plugin/plugin.json` 是 Codex 兼容清单；核心工作流仍保持为开放的 Agent Skills 格式。
+Start a new task after installation or updates. Available plugin UI and CLI commands depend on the host version.
 
-### Claude Code 插件市场
+</details>
+
+<details>
+<summary>Claude Code marketplace</summary>
 
 ```bash
 claude plugin marketplace add gengwenhao/book-to-mentor
 claude plugin install book-to-mentor@gengwenhao-skills
 ```
 
-仓库同时包含 Claude Code 插件与 marketplace 清单，核心 skill 内容与 Codex、skills.sh 安装方式共用同一来源。
+The plugin uses the same self-contained skill as the other channels.
 
-对 agent 说：
+</details>
 
-```text
-用 book-to-mentor 把 /path/to/book.pdf 转成导师 skill，先做第一章，输出到当前工作区。
-```
-
-已给出的目标、材料类型、位置不重复询问。默认产物在 `mentors/<slug>-mentor/`。生成后可以说“直接讲解这一节”“问我一道应用题”或“查一下这个术语”。向已有导师补充材料时，只更新书籍内容，保留教学规则和学习记录。
-
-## 提取范围与依赖
-
-需要 Python 3.10 或更新版本；标准库即可运行纯文本、HTML、EPUB、DOCX 提取及状态工具。可选提取器由使用环境单独安装：
-
-| 格式 | 实现/依赖 | 限制 |
-|---|---|---|
-| TXT、MD、Markdown | 标准库 | 默认 UTF-8；支持 BOM 声明的编码，不猜测未知编码 |
-| HTML、HTM | 标准库 | 提取可见文本；不是网页截图或完整表格重建 |
-| EPUB | 标准库 | 按 OPF spine 阅读顺序；不处理 DRM，不还原插图 |
-| DOCX | 标准库 | 提取正文段落与表格；复杂对象、图片等需核对 |
-| PDF（text） | `pypdf` 或 `pdfminer.six` | 文字层提取；扫描件需要另行 OCR |
-| PDF（technical） | 优先 `docling` | 不可用时降级为文字提取并警告；复杂公式/表格仍需核对 |
-| RTF | `striprtf` | 缺依赖明确失败，不用会吞字的正则回退 |
-
-MOBI/AZW 不受当前脚本支持；先用适合该文件的工具转成支持格式。不要把改后缀视为格式转换。
+<details>
+<summary>ClawHub / OpenClaw — after public approval</summary>
 
 ```bash
-python scripts/extract.py --check
-python -m pip install pypdf striprtf  # 仅在需要对应格式时安装
-python -m pip install docling        # 可选：技术 PDF
-python scripts/extract.py /path/to/book.pdf --mode text --workdir /path/to/extraction
+openclaw skills install @gengwenhao/book-to-mentor
 ```
 
-输出 `full_text.txt` 和 `metadata.json`。状态与退出码：`success` / 0、`partial` / 2、`failed` / 1。混合输入有失败时仍保留成功部分和失败原因；生成导师必须披露实际覆盖，不能称为完整全书。
+If the listing is pending or unavailable, use the GitHub/skills CLI route. Successful upload does not imply approval.
 
-`total_tokens` 是用于分段规划的保守启发式估算，不是特定模型的准确 token 数、计费结果或严格上界。提取成功也不保证图片、公式和语义完整；请核对来源与警告。
+</details>
 
-## 生成物与记录
+<details>
+<summary>Manual / offline installation</summary>
+
+Download `book-to-mentor-<version>.zip` from a GitHub Release, extract it, and copy the resulting `book-to-mentor/` into your host's actual skills directory. Or clone the repository and copy **`skills/book-to-mentor/`**, including its support files. Do not copy only `SKILL.md`.
+
+</details>
+
+## What you keep
 
 ```text
-<slug>-mentor/
-├── SKILL.md                   # 核心内容、路由、教学与改进协议
-├── sources.md                 # 来源、覆盖范围、提取缺口
-├── chapters/                  # 按需加载，含来源定位与关键问题
+your-book-mentor/
+├── SKILL.md                  # Teaching instructions + chapter routing
+├── sources.md                # Source inventory, coverage, extraction gaps
+├── chapters/                 # Source locators + practice questions
 │   └── index.md
-├── glossary.md
-├── patterns.md
-├── cheatsheet.md
-├── scripts/mentor_state.py    # 随导师复制，不依赖转换器安装位置
+├── glossary.md · patterns.md · cheatsheet.md
+├── scripts/mentor_state.py   # Travels with the mentor
 ├── references/state-schema.md
-├── state/state.json          # 权威观察记录
-└── learnings.md               # 派生学习摘要
+├── state/state.json          # Authoritative observations
+└── learnings.md              # Human-readable learning summary
 ```
 
-```bash
-python scripts/mentor_state.py init /path/to/mentor
-python scripts/mentor_state.py record /path/to/mentor --event /path/to/event.json
-python scripts/mentor_state.py show /path/to/mentor
-python scripts/validate_mentor.py /path/to/mentor
+Portable files, not a hosted knowledge silo. State initialization never overwrites history; repeated event IDs prevent duplicate observations. Simulated results never count as real learning evidence. [Learning-record contract →](docs/state-schema.en.md)
+
+## Built for more than one language
+
+- English and 简体中文 READMEs, mentor templates, format guides, and state contracts.
+- Teaching follows the learner's requested language, not the book's language. Preserve original terms and source locators when translating explanations.
+- New learning summaries support `--language en` and `--language zh-CN`; legacy records retain their language and history.
+- Structural checks accept English/Chinese headings. Other teaching languages can use stable section markers; JSON keys and paths stay language-independent.
+
+Some extractor diagnostics and the detailed design blueprint remain Chinese. Additional languages are welcome; we do not claim full localization for every host or CLI message.
+
+## Release once, distribute deliberately
+
+```text
+Version tag → tests + package checks → GitHub Release → ClawHub submission
+                                   ↘ directory / review checklist
 ```
 
-`init` 不覆盖已有状态；记录通过唯一事件 ID 防重复。模拟数据与真人证据分开；延迟回忆要求同章节、同概念、同模拟/真实类型已有独立答对记录，并间隔至少 24 小时。字段与例子见 [docs/state-schema.md](docs/state-schema.md)。这是项目的证据规则，不是经过验证的通用掌握标准。
+The workflow checks version consistency, bundled files, local links, and regression tests. It builds separate skill/plugin packages with checksums and a recorded source commit. Manual workflow runs build artifacts without publishing.
 
-## 开发与评估
+**Pushing code alone does not release a new ClawHub version, approve a directory submission, or update people's installed skills.** [Release guide →](docs/releasing.md)
 
-```bash
-python -m unittest discover -s tests -v
-# 可选：补齐真实 PDF/RTF 集成测试（建议在虚拟环境内）
-python -m pip install -r requirements-test.txt
-python -m unittest discover -s tests -v
-```
+## Trust, limits, and feedback
 
-回归测试验证提取、失败披露、状态持久化和结构约束。另需用真实请求演练教学行为：直接讲解、连续卡住、速查、旧记录续学、材料里含指令等。模拟通过只表示这些行为在样本中符合预期；真人教学效果仍需独立应用题及后续延迟测评，不能由模板、测试数量或生成成功推出。
+Source material is data, not instructions. Scanned PDFs need separate OCR; DRM and MOBI/AZW are unsupported. Partial extraction must be disclosed. Token counts are heuristic estimates, not billing counts. Structural tests cannot prove source fidelity or teaching effectiveness.
 
-## 反馈与共建
+This project does not send books or learning records to its author. Your agent/model provider and installation tools have their own data policies. Only use materials you have permission to process. [Privacy](PRIVACY.md) · [Terms](TERMS.md) · [Contributing](CONTRIBUTING.md) · [Design notes (中文)](docs/blueprint.md)
 
-欢迎分享真实使用反馈，尤其是：输入材料类型、所用 Agent、来源定位是否准确、教学过程中最有帮助或最卡住的部分，以及一周后是否仍愿意继续使用。
+Help shape the next version: what did you read, which agent did you use, where did the mentor help or get stuck, and did you return a week later?
 
-- [提交 Bug](https://github.com/gengwenhao/book-to-mentor/issues/new?template=bug.yml)
-- [兼容性报告](https://github.com/gengwenhao/book-to-mentor/issues/new?template=compatibility.yml)
-- [学习体验反馈](https://github.com/gengwenhao/book-to-mentor/issues/new?template=learning-feedback.yml)
-- [参与贡献](CONTRIBUTING.md)
+[Report a bug](https://github.com/gengwenhao/book-to-mentor/issues/new?template=bug.yml) · [Host compatibility](https://github.com/gengwenhao/book-to-mentor/issues/new?template=compatibility.yml) · [Learning feedback](https://github.com/gengwenhao/book-to-mentor/issues/new?template=learning-feedback.yml)
 
-请勿在反馈中上传无权公开的书籍正文、个人笔记、密钥或私人文件路径。项目本身不向作者发送书籍内容、学习记录或分析数据，详见 [隐私说明](PRIVACY.md)。
+Do not upload copyrighted book text, private notes, keys, or personal file paths in public issues.
 
-## 作者
+### Made by Geng Wenhao
 
-由 [Geng Wenhao](https://github.com/gengwenhao) 创建和维护。
+[GitHub @gengwenhao](https://github.com/gengwenhao) · RedNote / 小红书 **宇宙机吴彦祖** · ID **292844431**
 
-小红书：**宇宙机吴彦祖**（RedNote ID：`292844431`）
+Share your setup, a learning story, or an idea for the next version. Contact is optional and never a prerequisite for using the skill.
 
-欢迎通过小红书分享使用案例，或反馈你希望转换的书籍类型、实际学习体验和改进建议。
+<details>
+<summary>Scan to find me on RedNote / 小红书</summary>
 
-<img src="assets/xiaohongshu-qr.jpg" alt="宇宙机吴彦祖的小红书二维码，RedNote ID 292844431" width="360">
+<p><img src="assets/xiaohongshu-qr.jpg" alt="RedNote QR code for 宇宙机吴彦祖, ID 292844431" width="260"></p>
 
-## 设计来源
+</details>
 
-设计受到 [book-to-skill](https://github.com/virgiliojr94/book-to-skill)、[awesome-copilot 的 mentoring-juniors](https://github.com/github/awesome-copilot)、[socratic-method](https://gist.github.com/RalucaNicola/af42f35b54f96252fd0ab5e0920fbd24)、[Bloom](https://github.com/Li-Evan/Bloom) 和 [self-evolve-agent](https://hub.openclaw.ai/mikonos/self-evolve-agent) 启发。引用设计思路不代表本项目复现了这些项目的实现或实证结果。
+### Acknowledgments
 
-## License
+Inspired by [book-to-skill](https://github.com/virgiliojr94/book-to-skill), [mentoring-juniors](https://github.com/github/awesome-copilot), [socratic-method](https://gist.github.com/RalucaNicola/af42f35b54f96252fd0ab5e0920fbd24), [Bloom](https://github.com/Li-Evan/Bloom), and [self-evolve-agent](https://hub.openclaw.ai/mikonos/self-evolve-agent). Inspiration does not imply reproduction of their implementation or results.
 
-[MIT](LICENSE)
+[MIT License](LICENSE)
