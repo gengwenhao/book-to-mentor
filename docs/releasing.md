@@ -18,6 +18,10 @@ The ClawHub publishing CLI is pinned in `release.json`. Publishing to ClawHub is
 
 There is intentionally no root `SKILL.md`: installers should discover the self-contained nested skill, not an incomplete wrapper.
 
+For a 1.0.0 installation that still points at the old root entrypoint, reinstall using the README's command if the host cannot update it. Preserve locally edited files first; generated book mentors and their learning history do not need to be replaced.
+
+Workflow actions are pinned to reviewed commit SHAs and use Node 24; runners use `ubuntu-24.04` to avoid implicit OS migrations. Review and test updates before changing these pins.
+
 ## Prepare the next version
 
 Example for the release after 1.1.0 (choose an unused higher semantic version):

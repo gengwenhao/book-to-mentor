@@ -8,7 +8,7 @@ Recorded 2026-09-23. Status is a snapshot, not a guarantee of approval or availa
 | [skills.sh](https://skills.sh/gengwenhao/book-to-mentor) | GitHub-backed discovery and install / 基于 GitHub 的发现与安装 | CLI installs from source; indexing timing is external / CLI 从源码安装，索引时间由平台决定 |
 | Codex / ChatGPT custom marketplace | Repository manifest provided / 提供仓库自建市场清单 | Refresh marketplace + update/reinstall plugin / 刷新市场并更新或重装插件 |
 | Claude Code custom marketplace | Repository manifest provided / 提供仓库自建市场清单 | Refresh marketplace + plugin update, optional host auto-update / 刷新市场并更新，可选宿主自动更新 |
-| [ClawHub](https://clawhub.ai/gengwenhao/book-to-mentor) | 1.0.0 submitted; initial receipt pending-publication / 初版已受理，回执为待发布 | Tag workflow submits exact new version; moderation remains external / 标签工作流提交新版本，审核不受本仓库控制 |
+| [ClawHub](https://clawhub.ai/gengwenhao/book-to-mentor) | 1.1.0 accepted by the automated workflow; receipt pending-publication / 1.1.0 已由自动工作流提交并受理，待发布审核 | Tag workflow submits exact new version; moderation remains external / 标签工作流提交新版本，审核不受本仓库控制 |
 | [Codex community marketplace](https://www.codex-marketplace.com/) | Submitted; under review / 已提交，审核中 | Review or resubmission when needed; no assumed webhook / 视审核要求更新或重提，无自动同步保证 |
 | [Agent Skill Exchange PR #76](https://github.com/agentskillexchange/skills/pull/76) | Submitted PR, not an approved listing / 已提 PR，不等于已收录 | Maintainer merge; copied content needs another PR / 维护者合并，内容副本需后续 PR |
 | [Awesome Agent Skills PR #17](https://github.com/skillcreatorai/Awesome-Agent-Skills/pull/17) | Submitted PR, not an approved listing / 已提 PR，不等于已收录 | Maintainer merge; links follow source but copied prose can go stale / 维护者合并，链接指向源码但介绍副本不会自动更新 |
@@ -16,6 +16,10 @@ Recorded 2026-09-23. Status is a snapshot, not a guarantee of approval or availa
 Codex community submission tracking ID: `53C3B8AF-8F12-44B2-BB37-DB54BED9DA05`. It is a third-party directory, not the official OpenAI directory. / 此为第三方社区市场，并非 OpenAI 官方目录。
 
 No public listing is claimed for channels that have not accepted a submission. / 未实际受理的渠道不标记为已上架。
+
+## Verified release / 已验证的发布
+
+The [1.1.0 workflow](https://github.com/gengwenhao/book-to-mentor/actions/runs/35869398869) completed all three jobs: build, GitHub, and ClawHub. The [GitHub Release](https://github.com/gengwenhao/book-to-mentor/releases/tag/v1.1.0) contains both install ZIPs and checksums. All 86 regression tests passed with optional format parsers installed. The ClawHub receipt reports version `1.1.0`, status `pending-publication`, and 11 text files; it is saved as the workflow's `clawhub-receipt` artifact. / 1.1.0 的构建、GitHub 发布和 ClawHub 提交三个任务全部成功；86 项回归测试通过。ClawHub 回执为待发布审核，不能据此声称已公开可安装。
 
 ## Installed copies are separate / 已安装副本是另一层
 
