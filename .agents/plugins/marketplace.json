@@ -1,0 +1,16 @@
+{
+  "name": "gengwenhao-skills",
+  "interface": { "displayName": "Geng Wenhao Skills" },
+  "plugins": [
+    {
+      "name": "book-to-mentor",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/gengwenhao/book-to-mentor.git",
+        "ref": "master"
+      },
+      "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" },
+      "category": "Education"
+    }
+  ]
+}

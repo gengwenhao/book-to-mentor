@@ -3,6 +3,7 @@
 输入书籍或文档，生成一个可继续使用的导师 Skill：按章查内容、讲解或练习、记录学习证据，再据反馈调整教学方式。
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![skills.sh](https://skills.sh/b/gengwenhao/book-to-mentor)](https://skills.sh/gengwenhao/book-to-mentor)
 
 ## 能做什么
 
@@ -12,13 +13,30 @@
 
 这是供 agent 执行的生成流程，提取脚本不会自行生成导师。项目没有经过真人长期学习效果验证，也不承诺固定节省比例或学习成绩提升。当前实现与设计边界见 [docs/blueprint.md](docs/blueprint.md)。
 
-## 使用
+## 安装与使用
+
+### Agent Skills 通用安装
+
+```bash
+npx skills add gengwenhao/book-to-mentor
+```
+
+也可以直接克隆仓库，将整个目录放入宿主实际配置的技能目录：
 
 ```bash
 git clone https://github.com/gengwenhao/book-to-mentor.git
 ```
 
-把整个目录放入你使用的 agent **实际配置的技能目录**，或让 agent 直接读取本仓库的 `SKILL.md`。不同宿主的发现方式与安装路径需要按其配置确认；复制目录本身不证明安装成功。
+也可以让 agent 直接读取本仓库的 `SKILL.md`。不同宿主的发现方式与安装路径需要按其配置确认；复制目录本身不证明安装成功。
+
+### Codex / ChatGPT 插件市场
+
+```bash
+codex plugin marketplace add gengwenhao/book-to-mentor
+codex plugin add book-to-mentor@gengwenhao-skills
+```
+
+安装或更新后请在新任务中测试，以确保宿主重新加载 skill。仓库内的 `.codex-plugin/plugin.json` 是 Codex 兼容清单；核心工作流仍保持为开放的 Agent Skills 格式。
 
 对 agent 说：
 
@@ -91,6 +109,21 @@ python -m unittest discover -s tests -v
 ```
 
 回归测试验证提取、失败披露、状态持久化和结构约束。另需用真实请求演练教学行为：直接讲解、连续卡住、速查、旧记录续学、材料里含指令等。模拟通过只表示这些行为在样本中符合预期；真人教学效果仍需独立应用题及后续延迟测评，不能由模板、测试数量或生成成功推出。
+
+## 反馈与共建
+
+欢迎分享真实使用反馈，尤其是：输入材料类型、所用 Agent、来源定位是否准确、教学过程中最有帮助或最卡住的部分，以及一周后是否仍愿意继续使用。
+
+- [提交 Bug](https://github.com/gengwenhao/book-to-mentor/issues/new?template=bug.yml)
+- [兼容性报告](https://github.com/gengwenhao/book-to-mentor/issues/new?template=compatibility.yml)
+- [学习体验反馈](https://github.com/gengwenhao/book-to-mentor/issues/new?template=learning-feedback.yml)
+- [参与贡献](CONTRIBUTING.md)
+
+请勿在反馈中上传无权公开的书籍正文、个人笔记、密钥或私人文件路径。项目本身不向作者发送书籍内容、学习记录或分析数据，详见 [隐私说明](PRIVACY.md)。
+
+## 作者
+
+由 [Geng Wenhao](https://github.com/gengwenhao) 创建和维护。
 
 ## 设计来源
 

@@ -1,0 +1,32 @@
+name: Compatibility report
+description: Report installation or behavior on an Agent Skills-compatible host
+title: "[Compatibility]: "
+labels: [compatibility]
+body:
+  - type: input
+    id: host
+    attributes:
+      label: Host and version
+      placeholder: Codex, Claude Code, Cursor, OpenClaw...
+    validations:
+      required: true
+  - type: dropdown
+    id: result
+    attributes:
+      label: Result
+      options: [Works, Works with changes, Installation failed, Skill did not activate, Runtime failed]
+    validations:
+      required: true
+  - type: textarea
+    id: install
+    attributes:
+      label: Installation method
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: What happened?
+      description: Include workarounds or host-specific changes if applicable.
+    validations:
+      required: true

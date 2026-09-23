@@ -1,0 +1,28 @@
+{
+  "name": "book-to-mentor",
+  "version": "1.0.0",
+  "description": "Turn books and documents into source-grounded AI mentor skills with guided practice and learning records.",
+  "author": { "name": "Geng Wenhao", "url": "https://github.com/gengwenhao" },
+  "homepage": "https://github.com/gengwenhao/book-to-mentor",
+  "repository": "https://github.com/gengwenhao/book-to-mentor",
+  "license": "MIT",
+  "keywords": ["books", "learning", "mentor", "education", "agent-skills"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Book to Mentor",
+    "shortDescription": "Turn a book into a source-grounded AI mentor",
+    "longDescription": "Convert books and documents into reusable mentor skills with traceable sources, guided practice, learning evidence, and incremental updates.",
+    "developerName": "Geng Wenhao",
+    "category": "Education",
+    "capabilities": ["Read", "Write"],
+    "websiteURL": "https://github.com/gengwenhao/book-to-mentor",
+    "privacyPolicyURL": "https://github.com/gengwenhao/book-to-mentor/blob/master/PRIVACY.md",
+    "termsOfServiceURL": "https://github.com/gengwenhao/book-to-mentor/blob/master/TERMS.md",
+    "defaultPrompt": [
+      "把这本书转换成一个可持续学习的导师 skill。",
+      "Turn this document into a source-grounded mentor skill.",
+      "先把这本书的第一章做成导师并带我试学。"
+    ],
+    "brandColor": "#7C4D32"
+  }
+}

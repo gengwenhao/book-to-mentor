@@ -1,0 +1,55 @@
+name: Bug report
+description: Report a reproducible extraction, validation, or state-recording failure
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Please do not upload copyrighted book content, credentials, or private notes.
+  - type: input
+    id: host
+    attributes:
+      label: Agent host and version
+      placeholder: Codex, Claude Code, Cursor, OpenClaw...
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      placeholder: macOS 15, Python 3.13
+    validations:
+      required: true
+  - type: dropdown
+    id: format
+    attributes:
+      label: Input format
+      options: [PDF, EPUB, DOCX, TXT or Markdown, HTML, RTF, Multiple files, Other]
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction steps
+      description: Include the exact command or prompt, using safe placeholder paths.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior and safe logs
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Sharing check
+      options:
+        - label: I removed copyrighted text, personal data, credentials, and private paths.
+          required: true

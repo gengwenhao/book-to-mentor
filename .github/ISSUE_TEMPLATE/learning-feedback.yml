@@ -1,0 +1,54 @@
+name: Learning feedback
+description: Share structured feedback from a real Book-to-Mentor learning experience
+title: "[Learning feedback]: "
+labels: [learning-feedback]
+body:
+  - type: markdown
+    attributes:
+      value: Describe the book without pasting copyrighted text. Anonymous or generalized examples are welcome.
+  - type: input
+    id: material
+    attributes:
+      label: Material type and approximate size
+      placeholder: Chinese nonfiction PDF, about 300 pages
+    validations:
+      required: true
+  - type: input
+    id: host
+    attributes:
+      label: Agent host
+      placeholder: Codex, Claude Code, Cursor, OpenClaw...
+    validations:
+      required: true
+  - type: dropdown
+    id: generated
+    attributes:
+      label: Was a usable mentor generated?
+      options: [Yes, Partly, No]
+    validations:
+      required: true
+  - type: textarea
+    id: helpful
+    attributes:
+      label: What helped most?
+    validations:
+      required: true
+  - type: textarea
+    id: friction
+    attributes:
+      label: What was confusing, inaccurate, or tiring?
+    validations:
+      required: true
+  - type: dropdown
+    id: reuse
+    attributes:
+      label: Would you continue using the mentor next week?
+      options: [Yes, Maybe, No, Not tested yet]
+    validations:
+      required: true
+  - type: checkboxes
+    id: quote
+    attributes:
+      label: Optional permission
+      options:
+        - label: The maintainer may quote this feedback anonymously in project materials.
