@@ -45,7 +45,7 @@ npx skills add gengwenhao/book-to-mentor --skill book-to-mentor
 | Codex / ChatGPT 插件宿主 | 本仓库的自建 marketplace | 刷新市场，再更新或重装插件 |
 | Claude Code | 本仓库的插件 marketplace | 刷新市场并更新插件；可在宿主中选择自动更新 |
 | [GitHub Releases](https://github.com/gengwenhao/book-to-mentor/releases) | 带版本的 Skill、插件 ZIP 和校验和 | 发布标签自动生成 |
-| [ClawHub / OpenClaw](https://clawhub.ai/gengwenhao/book-to-mentor) | 已提交发布；公开可用性取决于审核 | 工作流自动提交标签版本，用户仍需更新本地安装 |
+| [ClawHub / OpenClaw](https://clawhub.ai/gengwenhao/book-to-mentor) | 公开目录已显示 1.0.0；1.1.0 已提交审核 | 工作流自动提交标签版本，用户仍需更新本地安装 |
 | 第三方目录 | Codex 社区市场及两个社区 PR 已提交 | 人工审核或 PR，**不承诺自动同步** |
 
 自建市场支持不等于进入 OpenAI / Anthropic 官方公共目录。其他 Agent Skills 宿主可能可用，但尚未逐一完成端到端验证。[渠道状态与跟进链接 →](docs/platforms.md)
@@ -80,13 +80,13 @@ claude plugin install book-to-mentor@gengwenhao-skills
 </details>
 
 <details>
-<summary>ClawHub / OpenClaw — 公开审核通过后</summary>
+<summary>ClawHub / OpenClaw</summary>
 
 ```bash
 openclaw skills install @gengwenhao/book-to-mentor
 ```
 
-如果条目仍在审核或不可访问，请先使用 GitHub / skills CLI 渠道。上传成功不等于审核通过。
+公开目录当前显示 1.0.0，新提交的 1.1.0 尚待批准。如需立即使用新版多语言包，请走 GitHub / skills CLI 渠道。上传成功不等于审核通过。
 
 </details>
 

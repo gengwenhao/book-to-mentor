@@ -45,7 +45,7 @@ Requires an agent that can read/write local files and run Python 3.10+. Text, Ma
 | Codex / ChatGPT plugin host | This repository's custom marketplace | Refresh marketplace and update/reinstall the plugin |
 | Claude Code | This repository's plugin marketplace | Marketplace refresh + plugin update; optional host auto-update setting |
 | [GitHub Releases](https://github.com/gengwenhao/book-to-mentor/releases) | Versioned skill and plugin ZIPs, checksums | Automatically produced by a release tag |
-| [ClawHub / OpenClaw](https://clawhub.ai/gengwenhao/book-to-mentor) | Publication submitted; public availability subject to moderation | Workflow submits each tagged version; installed copies still need updating |
+| [ClawHub / OpenClaw](https://clawhub.ai/gengwenhao/book-to-mentor) | Public registry lists 1.0.0; 1.1.0 submitted for review | Workflow submits each tagged version; installed copies still need updating |
 | Third-party directories | Codex community marketplace + two community PRs submitted | Review/PR workflow, **not** automatic synchronization |
 
 Custom marketplace support is not an official OpenAI/Anthropic directory listing. Other Agent Skills hosts may work; their end-to-end compatibility is not certified. [Exact channel status and tracking links →](docs/platforms.md)
@@ -80,13 +80,13 @@ The plugin uses the same self-contained skill as the other channels.
 </details>
 
 <details>
-<summary>ClawHub / OpenClaw — after public approval</summary>
+<summary>ClawHub / OpenClaw</summary>
 
 ```bash
 openclaw skills install @gengwenhao/book-to-mentor
 ```
 
-If the listing is pending or unavailable, use the GitHub/skills CLI route. Successful upload does not imply approval.
+The public registry currently lists 1.0.0; the submitted 1.1.0 is awaiting approval. Use the GitHub/skills CLI route for the new multilingual package now. Successful upload does not imply approval.
 
 </details>
 
