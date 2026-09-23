@@ -18,24 +18,21 @@ Book-to-Mentor 把书籍或文档转成可反复使用的 AI 导师 Skill：讲�
 | --- | --- | --- |
 | 提炼概念与框架，标注来源位置，按需加载章节。 | 自由切换引导练习、直接讲解和快速查阅。 | 区分提示后答对、独立应用和延迟回忆。 |
 
-这是由 **Agent 执行的工作流**，不是独立阅读器。脚本负责提取与校验，Agent 负责生成导师与教学。目前没有真人长期学习效果研究，不承诺固定学习提升比例。
+你只需要提供材料和学习目标；Agent 会完成内容整理、导师生成和学习记录，让一次转换可以变成持续的对话。
 
-## 一条命令，开始使用
+## 给它一本书，接着开口学
 
-```bash
-npx skills add gengwenhao/book-to-mentor --skill book-to-mentor
-```
-
-然后把本地书籍或文档交给 Agent：
+安装一次后，把书籍或文档交给 Agent，告诉它你想怎么学：
 
 ```text
-用 book-to-mentor 把 /path/to/book.pdf 转成导师 skill。
-先做第一章，用中文教学，输出到当前工作区。
+用 book-to-mentor 把我刚上传的这本书变成我的专属导师。
+先从第一章开始，用中文讲解；讲完后问我一道应用题。
 ```
 
-接着试试：“直接讲解这一节”“问我一道应用题”“接着上次继续学”。默认产物位于 `mentors/<slug>-mentor/`。后续追加材料时，保留已有教学规则和学习记录。
+之后可以直接说：“讲简单一点”“换个真实案例”“考考我”“接着上次继续学”。导师会保留内容结构和学习记录，不需要每次重新解释背景。
 
-需要能读写本地文件、运行 Python 3.10+ 的 Agent。文本、Markdown、HTML、EPUB、DOCX 使用标准库；PDF 需要 `pypdf` 或 `pdfminer.six`，RTF 需要 `striprtf`，技术型 PDF 可选 `docling`。[格式、依赖和限制 →](docs/formats.zh-CN.md)
+> [!TIP]
+> 第一次使用？在下面选择你正在使用的平台，安装完成后就可以回到这句话开始。通常不需要手动操作脚本或研究依赖。
 
 ## 选择你的使用平台
 
@@ -49,6 +46,17 @@ npx skills add gengwenhao/book-to-mentor --skill book-to-mentor
 | 第三方目录 | Codex 社区市场及两个社区 PR 已提交 | 人工审核或 PR，**不承诺自动同步** |
 
 自建市场支持不等于进入 OpenAI / Anthropic 官方公共目录。其他 Agent Skills 宿主可能可用，但尚未逐一完成端到端验证。[渠道状态与跟进链接 →](docs/platforms.md)
+
+<details>
+<summary>Agent Skills / skills.sh（通用安装）</summary>
+
+```bash
+npx skills add gengwenhao/book-to-mentor --skill book-to-mentor
+```
+
+这条命令会把完整 Skill 安装到支持的 Agent。安装一次后，日常使用只需要用自然语言说出书籍和学习目标。
+
+</details>
 
 <details>
 <summary>Codex / ChatGPT 自建插件市场</summary>
@@ -94,6 +102,20 @@ openclaw skills install @gengwenhao/book-to-mentor
 <summary>手动 / 离线安装</summary>
 
 从 GitHub Release 下载 `book-to-mentor-<version>.zip`，解压后将 `book-to-mentor/` 放进宿主实际配置的技能目录。也可以克隆仓库，只复制 **`skills/book-to-mentor/` 完整目录**。不要只复制 `SKILL.md`，它需要随附脚本与模板。
+
+</details>
+
+<details>
+<summary>环境与格式支持（遇到文件读取问题时再看）</summary>
+
+Skill 的本地工具使用 Python 3.10+。不少开发型 Agent 环境已经具备，正常使用时无需先理解或手动配置下面这些组件；如果当前环境缺少某项能力，Agent 应明确告诉你缺什么。
+
+- 文本、Markdown、HTML、EPUB、DOCX：使用 Python 标准库。
+- PDF：需要 `pypdf` 或 `pdfminer.six`；扫描版 PDF 还需要 OCR。
+- RTF：需要 `striprtf`。
+- 公式、表格较多的技术型 PDF：可选 `docling`，否则会明确提示降级。
+
+[查看完整的格式、依赖和限制 →](docs/formats.zh-CN.md)
 
 </details>
 

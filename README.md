@@ -18,24 +18,21 @@ Book-to-Mentor turns a book or document into a reusable AI mentor skill: explana
 | --- | --- | --- |
 | Map concepts and frameworks to source locations. Load chapters on demand. | Switch between guided practice, direct explanation, and quick lookup. | Separate hinted answers, independent application, and delayed recall. |
 
-This is an **agent-executed workflow**, not a standalone book reader. Scripts extract and validate; your agent builds and teaches the mentor. Long-term learning outcomes have not been validated in a human study.
+You provide the material and learning goal. Your agent organizes the content, builds the mentor, and carries the learning record forward from one conversation to the next.
 
-## Start in one command
+## Give it a book. Start talking.
 
-```bash
-npx skills add gengwenhao/book-to-mentor --skill book-to-mentor
-```
-
-Then give your agent a local book or document:
+Install it once, then give your agent a book or document and say how you want to learn:
 
 ```text
-Use book-to-mentor to turn /path/to/book.pdf into a mentor skill.
-Start with chapter 1, teach in English, and save it in this workspace.
+Use book-to-mentor to turn the book I just uploaded into my personal mentor.
+Start with chapter 1, explain it in English, then give me one application question.
 ```
 
-Try: “Explain this directly”, “Give me one application question”, or “Resume where we stopped.” Output defaults to `mentors/<slug>-mentor/`. When adding material later, the workflow preserves existing teaching rules and learning history.
+Then simply say: “Make that easier”, “Use a real example”, “Quiz me”, or “Resume where we stopped.” The mentor keeps its structure and learning record, so you do not have to re-explain your context every time.
 
-Requires an agent that can read/write local files and run Python 3.10+. Text, Markdown, HTML, EPUB, and DOCX use the standard library. PDF needs `pypdf` or `pdfminer.six`; RTF needs `striprtf`. Technical PDFs can optionally use `docling`. [Formats, setup, and limitations →](docs/formats.md)
+> [!TIP]
+> First time here? Pick your platform below. Once installed, come back to this prompt and start. You usually do not need to touch scripts or study dependencies.
 
 ## Choose your home
 
@@ -49,6 +46,17 @@ Requires an agent that can read/write local files and run Python 3.10+. Text, Ma
 | Third-party directories | Codex community marketplace + two community PRs submitted | Review/PR workflow, **not** automatic synchronization |
 
 Custom marketplace support is not an official OpenAI/Anthropic directory listing. Other Agent Skills hosts may work; their end-to-end compatibility is not certified. [Exact channel status and tracking links →](docs/platforms.md)
+
+<details>
+<summary>Agent Skills / skills.sh (universal install)</summary>
+
+```bash
+npx skills add gengwenhao/book-to-mentor --skill book-to-mentor
+```
+
+This installs the complete skill into a supported agent. After the one-time setup, everyday use is just a conversation about your book and learning goal.
+
+</details>
 
 <details>
 <summary>Codex / ChatGPT custom marketplace</summary>
@@ -94,6 +102,20 @@ The public registry currently lists 1.0.0; the submitted 1.1.0 is awaiting appro
 <summary>Manual / offline installation</summary>
 
 Download `book-to-mentor-<version>.zip` from a GitHub Release, extract it, and copy the resulting `book-to-mentor/` into your host's actual skills directory. Or clone the repository and copy **`skills/book-to-mentor/`**, including its support files. Do not copy only `SKILL.md`.
+
+</details>
+
+<details>
+<summary>Environment and file support (only if a document will not open)</summary>
+
+The skill's local tools use Python 3.10+. Many developer-focused agent environments already provide it, so there is no need to understand or configure these components up front. If the current environment is missing something, the agent should tell you exactly what it needs.
+
+- Text, Markdown, HTML, EPUB, and DOCX use the Python standard library.
+- PDF needs `pypdf` or `pdfminer.six`; scanned PDFs also need OCR.
+- RTF needs `striprtf`.
+- Formula- or table-heavy technical PDFs can optionally use `docling`; otherwise the workflow discloses the downgrade.
+
+[Full format support, setup, and limitations →](docs/formats.md)
 
 </details>
 
