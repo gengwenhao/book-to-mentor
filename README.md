@@ -125,6 +125,12 @@ python -m unittest discover -s tests -v
 
 由 [Geng Wenhao](https://github.com/gengwenhao) 创建和维护。
 
+小红书：**宇宙机吴彦祖**（RedNote ID：`292844431`）
+
+欢迎通过小红书分享使用案例，或反馈你希望转换的书籍类型、实际学习体验和改进建议。
+
+<img src="assets/xiaohongshu-qr.jpg" alt="宇宙机吴彦祖的小红书二维码，RedNote ID 292844431" width="360">
+
 ## 设计来源
 
 设计受到 [book-to-skill](https://github.com/virgiliojr94/book-to-skill)、[awesome-copilot 的 mentoring-juniors](https://github.com/github/awesome-copilot)、[socratic-method](https://gist.github.com/RalucaNicola/af42f35b54f96252fd0ab5e0920fbd24)、[Bloom](https://github.com/Li-Evan/Bloom) 和 [self-evolve-agent](https://hub.openclaw.ai/mikonos/self-evolve-agent) 启发。引用设计思路不代表本项目复现了这些项目的实现或实证结果。
