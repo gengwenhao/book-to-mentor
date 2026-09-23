@@ -38,6 +38,15 @@ codex plugin add book-to-mentor@gengwenhao-skills
 
 安装或更新后请在新任务中测试，以确保宿主重新加载 skill。仓库内的 `.codex-plugin/plugin.json` 是 Codex 兼容清单；核心工作流仍保持为开放的 Agent Skills 格式。
 
+### Claude Code 插件市场
+
+```bash
+claude plugin marketplace add gengwenhao/book-to-mentor
+claude plugin install book-to-mentor@gengwenhao-skills
+```
+
+仓库同时包含 Claude Code 插件与 marketplace 清单，核心 skill 内容与 Codex、skills.sh 安装方式共用同一来源。
+
 对 agent 说：
 
 ```text

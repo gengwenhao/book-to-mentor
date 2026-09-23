@@ -1,0 +1,25 @@
+{
+  "name": "gengwenhao-skills",
+  "metadata": {
+    "description": "Agent skills created and maintained by Geng Wenhao."
+  },
+  "owner": {
+    "name": "Geng Wenhao"
+  },
+  "plugins": [
+    {
+      "name": "book-to-mentor",
+      "description": "Turn books and documents into source-grounded AI mentor skills with guided practice and learning records.",
+      "author": {
+        "name": "Geng Wenhao"
+      },
+      "category": "education",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/gengwenhao/book-to-mentor.git",
+        "ref": "master"
+      },
+      "homepage": "https://github.com/gengwenhao/book-to-mentor"
+    }
+  ]
+}

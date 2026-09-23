@@ -1,0 +1,12 @@
+{
+  "name": "book-to-mentor",
+  "version": "1.0.0",
+  "description": "Turn books and documents into source-grounded AI mentor skills with guided practice and learning records.",
+  "author": {
+    "name": "Geng Wenhao"
+  },
+  "homepage": "https://github.com/gengwenhao/book-to-mentor",
+  "repository": "https://github.com/gengwenhao/book-to-mentor",
+  "license": "MIT",
+  "keywords": ["books", "learning", "mentor", "education", "agent-skills"]
+}
