@@ -47,6 +47,40 @@ Then simply say: “Make that easier”, “Use a real example”, “Quiz me”
 
 Custom marketplace support is not an official OpenAI/Anthropic directory listing. Other Agent Skills hosts may work; their end-to-end compatibility is not certified. [Exact channel status and tracking links →](docs/platforms.md)
 
+### Once installed, use the same prompt everywhere
+
+Whichever platform you install from, give your agent the book or document together with this prompt:
+
+```text
+Use book-to-mentor to turn the material I just provided into a personal mentor I can keep using.
+Teach me in English. First map the content structure and source locations, then start with chapter 1.
+Cover one small topic at a time: explain it, use a real example, and finish with one application question.
+Save my learning progress so that when I say “continue learning,” we resume where I stopped.
+```
+
+<details>
+<summary>Prompts for continuing, adding material, and fixing file access</summary>
+
+**Continue learning**
+
+```text
+Use this mentor to continue my previous learning. Briefly recap my progress, then start the next topic.
+```
+
+**Add material**
+
+```text
+Add the material I just provided to the existing mentor. Preserve its teaching rules and learning history, then tell me what was added or updated.
+```
+
+**A file will not open**
+
+```text
+Check why this material cannot be read. Tell me which format support or dependency is missing and give me the simplest fix for this environment. Do not silently skip content.
+```
+
+</details>
+
 <details>
 <summary>Agent Skills / skills.sh (universal install)</summary>
 
