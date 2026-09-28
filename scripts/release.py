@@ -14,6 +14,7 @@ SKILL = Path('skills/book-to-mentor')
 MANIFESTS = ('.codex-plugin/plugin.json', '.claude-plugin/plugin.json')
 # Only these resources are copied into the independently installable skill.
 RESOURCES = (
+    'release.json', 'scripts/check_update.py',
     'scripts/extract.py', 'scripts/mentor_state.py', 'scripts/validate_mentor.py',
     'assets/mentor-template.md', 'assets/mentor-template.en.md',
     'docs/formats.md', 'docs/formats.zh-CN.md',

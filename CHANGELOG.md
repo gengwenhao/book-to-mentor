@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Add an on-demand, read-only GitHub release checker, bundled version metadata, and bilingual update instructions.
+
 ## 1.1.0
 
 - Add a tested, tag-triggered release workflow with GitHub archives, SHA-256 checksums, ClawHub publishing, and a manual marketplace checklist.

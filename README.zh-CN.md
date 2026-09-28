@@ -153,6 +153,19 @@ Skill 的本地工具使用 Python 3.10+。不少开发型 Agent 环境已经具
 
 </details>
 
+## 检查更新
+
+直接对 Agent 说：**“检查 book-to-mentor 更新”**。它会通过 GitHub Releases 比较已安装版本与最新正式版，展示更新内容和发布链接。检查无需 GitHub 登录，不会自动安装或修改已有导师、学习记录；网络不可用时会说明未能检查，仍可继续学习。
+
+升级时沿用原安装渠道；GitHub 有新版不代表其他市场已经同步。旧版若不识别这句话，请先通过原渠道更新或重装一次。
+
+<details>
+<summary>手动检查</summary>
+
+在已安装的 Skill 目录运行 `python scripts/check_update.py`，返回 JSON 格式的版本与检查状态。
+
+</details>
+
 ## 你会得到什么
 
 ```text

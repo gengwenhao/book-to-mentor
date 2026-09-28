@@ -153,6 +153,19 @@ The skill's local tools use Python 3.10+. Many developer-focused agent environme
 
 </details>
 
+## Check for updates
+
+Ask your agent: **“Check book-to-mentor for updates.”** It compares the installed version with the latest stable GitHub Release and shows the release notes and link. No GitHub login is required. Checking does not install anything or modify existing mentors or learning records. If GitHub is unreachable, the check reports that limitation and learning can continue.
+
+Upgrade through your original installation channel; a GitHub release does not mean other marketplaces have synchronized. If an older installation does not recognize this request, update or reinstall through its original channel once.
+
+<details>
+<summary>Check manually</summary>
+
+Run `python scripts/check_update.py` from the installed skill directory for a JSON result containing versions and check status.
+
+</details>
+
 ## What you keep
 
 ```text
