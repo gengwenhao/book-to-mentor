@@ -1,8 +1,10 @@
 # Changelog
 
-## Unreleased
+## 1.2.0
 
 - Add an on-demand, read-only GitHub release checker, bundled version metadata, and bilingual update instructions.
+- Simplify English and Chinese onboarding and add reusable cross-platform learning prompts.
+- Handle unavailable checks explicitly, including offline, rate-limit, certificate, and invalid-release responses; preserve existing mentors and learning records.
 
 ## 1.1.0
 
